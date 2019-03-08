@@ -7,3 +7,7 @@ RUN echo "deb http://ppa.launchpad.net/thomas-schiex/blender-legacy/ubuntu bioni
     apt-get install -y --no-install-recommends \
     blender && \
     rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp/blender
+
+CMD [ "blender" ]
