@@ -34,3 +34,8 @@ Your host system needs to have **nvidia-docker2** installed and NVIDIA GPU drive
     ```bash
     $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest bash
     ```
+
+<br>
+
+## Todo
+* Run container as host user - for file permissions on created files
