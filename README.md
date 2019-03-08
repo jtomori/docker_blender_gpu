@@ -1,9 +1,14 @@
 # Docker Image for Blender GPU rendering
-This image contains packages needed for running GPU-accelerated apps and Blender on systems with Linux and Nvidia GPU.
+This image contains packages needed for running GPU-accelerated Blender on systems with Linux and Nvidia GPU. Blender can run in GUI mode or from command-line.
 
-Blender version: **2.8**
+This image is based on `nvidia/cudagl` and contains **CUDA 10.0 + OpenGL (glvnd 1.0)**. Blender is fetched from repositories by [Thomas Schiex](https://launchpad.net/~thomas-schiex).
 
-This image is based on `nvidia/cudagl:10.0-base-ubuntu18.04` and contains **CUDA 10.0 + OpenGL (glvnd 1.0)**. 
+Available tags
+* `latest` points to `2.80beta`
+* `2.80beta`
+* `2.79b`
+
+Workdir in container is set to `/tmp/blender`.
 
 <br>
 
@@ -17,7 +22,15 @@ Your host system needs to have **nvidia-docker2** installed and NVIDIA GPU drive
     ```bash
     $ xhost +local:root
     ```
-* Run container with Blender
+* Run container with Blender in GUI mode *(current directory will be mounted as `/tmp/blender` in the container)*
     ```bash
-    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix jtomori/blender_gpu
+    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest
+    ```
+* Run container with Blender in command-line mode *(current directory will be mounted as `/tmp/blender` in the container)*
+    ```bash
+    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest blender -b project_file.blend # your parameters here
+    ```
+* Run container with Bash shell *(current directory will be mounted as `/tmp/blender` in the container)*
+    ```bash
+    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest bash
     ```
