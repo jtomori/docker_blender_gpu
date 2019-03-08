@@ -8,8 +8,6 @@ Available tags
 * `2.80beta`
 * `2.79b`
 
-Workdir in container is set to `/tmp/blender`.
-
 <br>
 
 ## Requirements
@@ -18,24 +16,30 @@ Your host system needs to have **nvidia-docker2** installed and NVIDIA GPU drive
 <br>
 
 ## Running
-* Set up permissions *(needs to be done only once per boot)*
+* Run container with Blender in GUI mode
     ```bash
-    $ xhost +local:root
+    $ docker run --runtime=nvidia -it --rm -e DISPLAY -u $(id -u):$(id -g) -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest
     ```
-* Run container with Blender in GUI mode *(current directory will be mounted as `/tmp/blender` in the container)*
+* Run container with Blender in command-line mode
     ```bash
-    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest
+    $ docker run --runtime=nvidia -it --rm -e DISPLAY -u $(id -u):$(id -g) -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest blender -b project_file.blend # your parameters here
     ```
-* Run container with Blender in command-line mode *(current directory will be mounted as `/tmp/blender` in the container)*
+* Run container with Bash shell
     ```bash
-    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest blender -b project_file.blend # your parameters here
-    ```
-* Run container with Bash shell *(current directory will be mounted as `/tmp/blender` in the container)*
-    ```bash
-    $ docker run --runtime=nvidia -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest bash
+    $ docker run --runtime=nvidia -it --rm -e DISPLAY -u $(id -u):$(id -g) -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)":/tmp/blender jtomori/blender_gpu:latest bash
     ```
 
 <br>
 
-## Todo
-* Run container as host user - for file permissions on created files
+## Notes
+* Docker parameter `-v "$(pwd)":/tmp/blender` mounts current working directory to `/tmp/blender` in container
+* `-u $(id -u):$(id -g)` sets container user to your user (user which is running the container)
+    * this user will not exist in the container *(Bash will issue a warning)* which should be fine but some applications might not work correctly
+    * it is however needed for access rights to X server and is useful for permissions and ownership on files created in container
+    * if you skip this option then you need to run `$ xhost +local:root` *(only once per system boot is needed)*
+        * otherwise you will get this error
+            ```
+            No protocol specified
+            Unable to open a display
+            ```
+* Default working directory in container is set to `/tmp/blender`
