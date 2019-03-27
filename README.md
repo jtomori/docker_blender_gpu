@@ -1,12 +1,14 @@
 # Docker Image for Blender GPU rendering
 This image contains packages needed for running GPU-accelerated Blender on systems with Linux and Nvidia GPU. Blender can run in GUI mode or from command-line.
 
-This image is based on `nvidia/cudagl` and contains **CUDA 10.0 + OpenGL (glvnd 1.0)**. Blender is fetched from repositories by [Thomas Schiex](https://launchpad.net/~thomas-schiex).
+This image is based on `nvidia/cudagl` and contains CUDA & OpenGL. Blender is fetched from repositories by [Thomas Schiex](https://launchpad.net/~thomas-schiex).
 
 Available tags
 * `latest` points to `2.80beta`
-* `2.80beta`
-* `2.79b`
+* `2.80beta` (CUDA 10.0)
+* `2.80beta-cuda9.2` (CUDA 9.2)
+* `2.79b` (CUDA 10.0)
+* `2.79b-cuda9.2` (CUDA 9.2)
 
 <br>
 
