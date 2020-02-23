@@ -1,4 +1,4 @@
-FROM nvidia/cudagl:10.0-devel-ubuntu18.04
+FROM nvidia/cudagl:10.2-devel-ubuntu18.04
 
 # Install blender
 RUN echo "deb http://ppa.launchpad.net/thomas-schiex/blender-legacy/ubuntu bionic main" >> /etc/apt/sources.list && \
