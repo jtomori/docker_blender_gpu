@@ -6,9 +6,7 @@ This image is based on `nvidia/cudagl` and contains CUDA & OpenGL. Blender is fe
 Available tags
 * `latest` points to `2.80beta`
 * `2.80beta` (CUDA 10.0)
-* `2.80beta-cuda9.2` (CUDA 9.2)
 * `2.79b` (CUDA 10.0)
-* `2.79b-cuda9.2` (CUDA 9.2)
 
 <br>
 
