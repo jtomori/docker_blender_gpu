@@ -4,7 +4,8 @@ This image contains packages needed for running GPU-accelerated Blender on syste
 This image is based on `nvidia/cudagl` and contains CUDA 10.2 & OpenGL. Blender is fetched from repositories by [Thomas Schiex](https://launchpad.net/~thomas-schiex).
 
 Available tags
-* `latest` points to `2.80beta`
+* `latest` points to `2.80`
+* `2.80`
 * `2.80beta`
 * `2.79b`
 
