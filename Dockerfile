@@ -5,7 +5,7 @@ RUN echo "deb http://ppa.launchpad.net/thomas-schiex/blender/ubuntu bionic main"
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D32A3245446233723DECE00F7281E3E842A98114 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    blender && \
+    blender llvm-6.0 && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp/blender
